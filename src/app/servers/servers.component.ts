@@ -23,4 +23,8 @@ export class ServersComponent implements OnInit {
     alert("hola");
   }
 
+  onUpdateServersName(event: any){
+    console.log(event.target.value);
+  }
+
 }

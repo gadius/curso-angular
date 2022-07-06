@@ -1,3 +1,4 @@
 <p>servers works!</p>
+<input type="text" class="form-control" (input)="onUpdateServersName($event)">
 <button class="btn btn-success" [disabled]="!allowNewServer" (click)="onServersCreated()">Click me!</button>
 <p>{{ allowNewServer }}</p>
