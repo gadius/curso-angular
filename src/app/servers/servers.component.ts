@@ -19,4 +19,8 @@ export class ServersComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onServersCreated(){
+    alert("hola");
+  }
+
 }

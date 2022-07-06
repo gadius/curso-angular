@@ -1,2 +1,3 @@
 <p>servers works!</p>
-<button class="btn btn-success" [disabled] = "allowNewServer">Click me!</button>
+<button class="btn btn-success" [disabled]="!allowNewServer" (click)="onServersCreated()">Click me!</button>
+<p>{{ allowNewServer }}</p>
