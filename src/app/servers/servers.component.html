@@ -1,4 +1,17 @@
 <p>servers works!</p>
 <input type="text" class="form-control" (input)="onUpdateServersName($event)">
+
+
+<input type="text" class="form-control" [(ngModel)]="serverName">
+{{serverName}}
+
+
+
 <button class="btn btn-success" [disabled]="!allowNewServer" (click)="onServersCreated()">Click me!</button>
 <p>{{ allowNewServer }}</p>
+
+
+<p *ngIf="false"; else newComponentOnTheFly>UNO</p>
+<ng-template #newComponentOnTheFly>
+    <p>DOS</p>
+</ng-template>
