@@ -14,9 +14,10 @@ export class AppComponent implements OnInit {
     this.signupForm = new FormGroup({
       'userData': new FormGroup({
         'username': new FormControl(null, Validators.required),
-        'email': new FormControl(null,[Validators.required, Validators.email]),
-        'gender': new FormControl('female'),
+        'email': new FormControl(null,[Validators.required, Validators.email])
       }),
+      'gender': new FormControl('female'),
+      'hobbies': new FormArray([])
 
     });
   }
@@ -33,6 +34,11 @@ export class AppComponent implements OnInit {
     *ngFor="let hobbyControl of getControls(); let i = index"
 
     */
+  }
+
+  onAddHobby(){
+    const control = new FormControl(null, Validators.required);
+    (<FormArray>this.signupForm.get('hobbies')).push(control);
   }
 
 
