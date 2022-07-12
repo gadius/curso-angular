@@ -2,7 +2,8 @@ import { Pipe, PipeTransform } from "@angular/core";
 
 
 @Pipe({
-  name: 'shortenpipe'
+  name: 'shortenpipe',
+  pure: false
 })
 export class ShortenPipe implements PipeTransform{
 
