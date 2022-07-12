@@ -1,67 +1,8 @@
+<app-header></app-header>
 <div class="container">
   <div class="row">
-    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-      <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-          <label for="projectname">Project Name</label>
-          <input
-            type="text"
-            id="projectname"
-            class="form-control"
-            formControlName="projectname"
-          />
-          <span
-            *ngIf="
-              !signupForm.get('projectname').valid &&
-              signupForm.get('projectname').touched
-            "
-            class="help-block"
-            >Please enter a valid Project Name!
-
-
-          </span>
-        </div>
-
-        <div class="form-group">
-          <label for="email">email</label>
-          <input
-            type="text"
-            id="email"
-            class="form-control"
-            formControlName="email"
-          />
-          <span
-            *ngIf="
-              !signupForm.get('email').valid && signupForm.get('email').touched
-            "
-            class="help-block"
-            >Please enter a valid email!</span
-          >
-        </div>
-
-        <div class="form-group">
-          <label for="projectstatus">Project Status</label>
-          <select
-            type="text"
-            id="projectstatus"
-            class="form-control"
-            formControlName="projectstatus"
-          >
-            <option value="stable">Stable</option>
-            <option value="critical">Critical</option>
-            <option value="finished">Finished</option>
-          </select>
-          <span
-            *ngIf="
-              !signupForm.get('projectstatus').valid && signupForm.get('projectstatus').touched
-            "
-            class="help-block"
-            >Please enter a valid status!</span
-          >
-        </div>
-
-        <button class="btn btn-primary" type="submit">Submit</button>
-      </form>
+    <div class="col-md-12">
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>
