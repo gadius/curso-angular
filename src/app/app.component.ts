@@ -10,48 +10,27 @@ import { Observable } from 'rxjs';
 export class AppComponent implements OnInit {
   genders = ['male', 'female'];
   signupForm: FormGroup;
-  forbiddenUsernames = ['Chris', 'Ana'];
+  //forbiddenUsernames = ['Chris', 'Ana'];
 
   ngOnInit() {
     this.signupForm = new FormGroup({
-      userData: new FormGroup({
-        username: new FormControl(null, [
-          Validators.required,
-          this.forbiddenNamesValidator.bind(this),
-        ]),
-        email: new FormControl(null, [Validators.required, Validators.email], this.forbiddenEmails),
-      }),
-      gender: new FormControl('female'),
-      hobbies: new FormArray([]),
+      projectname: new FormControl(
+        null,
+        [Validators.required],
+        this.forbiddenProjectNamesValidatorSync
+      ),
+      email: new FormControl(null, [Validators.required, Validators.email]),
+      projectstatus: new FormControl(null),
     });
-
-    //Reacting to status or value changes
-
-    this.signupForm.valueChanges.subscribe((value) => {
-      console.log(value);
-    });
-
-
-    this.signupForm.statusChanges.subscribe((value) => {
-      console.log(value);
-    });
-
-    this.signupForm.setValue({
-      'userData': {
-        'username': 'Max'
-      }
-    });
-
-    this.signupForm.patchValue({
-      'userData': {
-        'username': 'Max2'
-      }
-    });
-
-    this.signupForm.reset();
   }
 
-  onSubmit() {}
+  onSubmit() {
+    console.log(
+      this.signupForm.value.projectname,
+      this.signupForm.value.email,
+      this.signupForm.value.projectstatus,
+    );
+  }
 
   getControls() {
     return (<FormArray>this.signupForm.get('hobbies')).controls;
@@ -63,25 +42,24 @@ export class AppComponent implements OnInit {
     */
   }
 
-  onAddHobby() {
-    const control = new FormControl(null, Validators.required);
-    (<FormArray>this.signupForm.get('hobbies')).push(control);
-  }
+  forbiddenProjectNamesValidator(control: FormControl): { [s: string]: boolean } {
+    const arr_names: string[] = ['Test'];
 
-  forbiddenNamesValidator(control: FormControl): { [s: string]: boolean } {
-    if (this.forbiddenUsernames.indexOf(control.value) !== -1) {
+    if (arr_names.indexOf(control.value) !== -1) {
       return { nameIsForbidden: true };
     }
     return null; //At this point form control is valid
   }
 
-  forbiddenEmails(control: FormControl): Promise<any> | Observable<any> {
+
+  forbiddenProjectNamesValidatorSync(
+    control: FormControl
+  ): Promise<any> | Observable<any> {
     const promise = new Promise<any>((resolve, reject) => {
       setTimeout(() => {
-        if(control.value === 'test@test.com'){
-          resolve({'email': 1});
-        }
-        else{
+        if (control.value === 'Test') {
+          resolve({ projectname: true });
+        } else {
           resolve(null);
         }
       }, 2000);
