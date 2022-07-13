@@ -1,50 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  filteredStatus = '';
-  appStatus = new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve('stable text status');
-    },2000)
-  });
+export class AppComponent implements OnInit {
+  loadedPosts = [];
 
-  servers = [
-    {
-      instanceType: 'medium',
-      name: 'ZProduction Server',
-      status: 'stable',
-      started: new Date(15, 1, 2017)
-    },
-    {
-      instanceType: 'large',
-      name: 'BUser Database',
-      status: 'stable',
-      started: new Date(15, 1, 2017)
-    },
-    {
-      instanceType: 'small',
-      name: 'CDevelopment Server',
-      status: 'offline',
-      started: new Date(15, 1, 2017)
-    },
-    {
-      instanceType: 'small',
-      name: 'ATesting Environment Server',
-      status: 'stable',
-      started: new Date(15, 1, 2017)
-    }
-  ];
-  getStatusClasses(server: {instanceType: string, name: string, status: string, started: Date}) {
-    return {
-      'list-group-item-success': server.status === 'stable',
-      'list-group-item-warning': server.status === 'offline',
-      'list-group-item-danger': server.status === 'critical'
-    };
+  constructor(private http: HttpClient) {}
+
+  ngOnInit() {}
+
+  onCreatePost(postData: { title: string; content: string }) {
+    // Send Http request
+    console.log(postData);
+    this.http.post('https://ng-complete-guide-1b096-default-rtdb.firebaseio.com/posts.json',
+    postData).subscribe(responseData => {
+      console.log(responseData);
+    });
   }
 
+  onFetchPosts() {
+    // Send Http request
+  }
+
+  onClearPosts() {
+    // Send Http request
+  }
 }
