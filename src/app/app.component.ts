@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    this.fetchPosts();
+    //this.fetchPosts();
   }
 
   onCreatePost(postData: { title: string; content: string }) {
@@ -42,6 +42,7 @@ export class AppComponent implements OnInit {
       )
       .subscribe(posts => {
         // ...
+        this.loadedPosts = posts;
         console.log(posts);
       });
   }
