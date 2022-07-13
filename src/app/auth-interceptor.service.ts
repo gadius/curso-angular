@@ -1,5 +1,5 @@
 import { HttpRequest, HttpInterceptor, HttpHandler, HttpEventType } from "@angular/common/http";
-import { tap } from 'rxjs/operator';
+import { tap } from 'rxjs/operators';
 
 export class AuthInterceptorService{
   intercept(req: HttpRequest<any>, next: HttpHandler){
@@ -12,7 +12,6 @@ export class AuthInterceptorService{
         console.log(event);
         if(event.type == HttpEventType.Response)
           console.log('Response arrived, body: data ');
-          console.log(event.body);
       })
     );
   }
