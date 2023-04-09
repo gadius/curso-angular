@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 
-import { Post } from './post.model';
+import { AuthService } from './auth/auth.service';
+import { LoggingService } from './logging.service';
 
 @Component({
   selector: 'app-root',
@@ -9,13 +9,13 @@ import { Post } from './post.model';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  posts: Post[] = [];
-
-  constructor(private http: HttpClient) {}
+  constructor(
+    private authService: AuthService,
+    private loggingService: LoggingService
+  ) {}
 
   ngOnInit() {
-    this.http
-      .get<Post[]>('https://jsonplaceholder.typicode.com/posts')
-      .subscribe(fetchedPosts => (this.posts = fetchedPosts));
+    this.authService.autoLogin();
+    this.loggingService.printLog('Hello from AppComponent ngOnInit');
   }
 }
